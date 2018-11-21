@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        {{!-- navbar --}}
+        <nav>
+            <div class="nav-wrapper light-blue darken-4">
+                <a href="#" class="brand-logo">LostBet</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li class="active"><a href="/">Partite</a></li>
+                    <li><a href="/classifica">Classifica</a></li>
+                    <li><a href="/logout">LogOut</a></li>
+                </ul>
+            </div>
+        </nav>
+    {{!-- navbar --}}
+
+    {{#partite}}
+        <h5>{{s1}} - {{s2}}</h5>
+        <b>1:</b> {{quota1}} - <b>X:</b> {{quotax}} - <b>2:</b> {{quota2}} - <b>Gol:</b> {{quotaGol}} - <b>NoGol:</b> {{quotaNoGol}} - <b>Over3.5:</b> {{quotaOver}} - <b>Under3.5:</b> {{quotaUnder}}
+    {{/partite}}
+    </div>
+</body>
+</html>

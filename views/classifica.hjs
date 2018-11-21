@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        {{!-- navbar --}}
+        <nav>
+            <div class="nav-wrapper light-blue darken-4">
+                <a href="#" class="brand-logo">LostBet</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li ><a href="/">Partite</a></li>
+                    <li class="active"><a href="/classifica">Classifica</a></li>
+                    <li><a href="/logout">LogOut</a></li>
+                </ul>
+            </div>
+        </nav>
+        {{!-- navbar --}}
+
+        <h3>Classifica Campionato LostBet</h3>
+        <table>
+        <tr>
+            <td><b>P:</b></td>
+            <td><b>Squadra:</b></td>
+            <td><b>Punti:</b></td>
+            <td><b>pv:</b></td>
+            <td><b>pp:</b></td>
+            <td><b>ps:</b></td>
+            <td><b>GF:</b></td>
+            <td><b>GS:</b></td>
+        </tr>
+        {{#squadre}}
+        <tr>
+            <td>{{posizione}}</td>
+            <td><b>{{nome}}</b>:</td>
+            <td><b>{{punti}}</b></td>
+            <td>{{pv}}</td>
+            <td>{{pp}}</td>
+            <td>{{ps}}</td>
+            <td>{{golfatti}}</td>
+            <td>{{golsubiti}}</td>
+        </tr>
+        {{/squadre}}
+        </table>
+        
+</body>
+
+</html>
