@@ -64,8 +64,8 @@ setInterval(function () {
         giornata = 0
     } 
     else {
-        reset()
-        giornata = 0
+        console.log(giornata)
+        giornata++
     }
 }, 180000)
 
@@ -217,7 +217,7 @@ express()
                                 sommaQuote += parseFloat(partite[i].quota)
                             }
                             sommaQuote = Math.round(sommaQuote * 100) / 100
-                            bonus = ((sommaQuote * puntata) / 100) * (nPartite * 35)
+                            bonus = ((sommaQuote * puntata) / 100) * (nPartite * 20)
                             vincita = (sommaQuote * puntata) + bonus
                             bonus = Math.round(bonus * 100) / 100
                             vincita = Math.round(vincita * 100) / 100
@@ -265,7 +265,7 @@ express()
                                     quota: scommesse[i].partite[j].quota
                                 })
                             }
-                            bonus = ((sommaQuote * scommesse[i].puntata) / 100) * (scommesse[i].partite.length * 35)
+                            bonus = ((sommaQuote * scommesse[i].puntata) / 100) * (scommesse[i].partite.length * 20)
                             bonus = Math.round(bonus * 100) / 100
                             vincitaPotenziale = Math.round(((sommaQuote * scommesse[i].puntata) + bonus) * 100) / 100
                             puntata = scommesse[i].puntata
@@ -412,7 +412,7 @@ let genera = () => {
                     quota1 = quoteperScarsa()
                     quotax = quoteperScarsa()
                     quota2 = quoteperMedia()
-                    quotaGol = quoteperScarsa()
+                    quotaGol = quoteperMedia()
                     quotaNoGol = quoteperMedia()
                     quotaOver = quoteperScarsa()
                     quotaUnder = quoteperMedia()
@@ -422,7 +422,7 @@ let genera = () => {
                     quota1 = quoteperScarsa()
                     quotax = quoteperScarsa()
                     quota2 = quoteperForte()
-                    quotaGol = quoteperScarsa()
+                    quotaGol = quoteperMedia()
                     quotaNoGol = quoteperMedia()
                     quotaOver = quoteperMedia()
                     quotaUnder = quoteperMedia()
@@ -573,7 +573,7 @@ let randomSquadre = () => {
 }
 
 let golperScarsa = () => {
-    let notRandom = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 3, 4]
+    let notRandom = [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 3, 4]
     let idx = Math.floor(Math.random() * notRandom.length)
     return notRandom[idx]
 }
