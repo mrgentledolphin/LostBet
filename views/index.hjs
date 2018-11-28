@@ -1,32 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UT
+    ">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>LostBet</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         {{!-- navbar --}}
         <nav>
             <div class="nav-wrapper light-blue darken-4">
-                <a href="#" class="brand-logo">LostBet</a>
+                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <a href="/" class="brand-logo">LostBet</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li class="active"><a href="/">Partite</a></li>
                     <li><a href="/classifica">Classifica</a></li>
+                    <li><a href="/risultati">Risultati</a></li>
+                    <li><a href="/schedine">Schedine</a></li>
                     <li><a href="/logout">LogOut</a></li>
+                    <li><a href="#">C: {{crediti}}</a></li>
                 </ul>
             </div>
         </nav>
+        <ul id="slide-out" class="sidenav">
+            <li><a href="/">Partite</a></li>
+            <li><a href="/classifica">Classifica</a></li>
+            <li><a href="/risultati">Risultati</a></li>
+            <li><a href="/schedine">Schedine</a></li>
+            <li><a href="/logout">LogOut</a></li>
+            <li><a href="#">C: {{crediti}}</a></li>
+        </ul>
     {{!-- navbar --}}
-
-    {{#partite}}
-        <h5>{{s1}} - {{s2}}</h5>
-        <b>1:</b> {{quota1}} - <b>X:</b> {{quotax}} - <b>2:</b> {{quota2}} - <b>Gol:</b> {{quotaGol}} - <b>NoGol:</b> {{quotaNoGol}} - <b>Over3.5:</b> {{quotaOver}} - <b>Under3.5:</b> {{quotaUnder}}
-    {{/partite}}
+    <h4>Giornata: {{giornata}} - Scade alle {{ore}}:{{minuti}}:{{secondi}}</h4>
+    <table>
+        <tr>
+            <td><b>Squadre</b></td>
+            <td><b>1</b></td>
+            <td><b>X</b></td>
+            <td><b>2</b></td>
+            <td><b>Gol</b></td>
+            <td><b>NoGol</b></td>
+            <td><b>Over</b></td>
+            <td><b>Under</b></td>
+        </tr>
+        {{#partite}}
+        <tr>
+            <h5>
+                <td>{{s1}} - {{s2}}</td>
+                <td><button data-s1="{{s1}}" data-s2="{{s2}}" data-timestamp="{{timestamp}}" data-p="1" data-quota="{{quota1}}" class="btnQuota btn light-blue darken-4">{{quota1}}</button></td>
+                <td><button data-s1="{{s1}}" data-s2="{{s2}}" data-timestamp="{{timestamp}}" data-p="x" data-quota="{{quotax}}" class="btnQuota btn light-blue darken-4">{{quotax}}</button></td>
+                <td><button data-s1="{{s1}}" data-s2="{{s2}}" data-timestamp="{{timestamp}}" data-p="2" data-quota="{{quota2}}" class="btnQuota btn light-blue darken-4">{{quota2}}</button></td>
+                <td><button data-s1="{{s1}}" data-s2="{{s2}}" data-timestamp="{{timestamp}}" data-p="Gol" data-quota="{{quotaGol}}" class="btnQuota btn light-blue darken-4">{{quotaGol}}</button></td>
+                <td><button data-s1="{{s1}}" data-s2="{{s2}}" data-timestamp="{{timestamp}}" data-p="NoGol" data-quota="{{quotaNoGol}}" class="btnQuota btn light-blue darken-4">{{quotaNoGol}}</button></td>
+                <td><button data-s1="{{s1}}" data-s2="{{s2}}" data-timestamp="{{timestamp}}" data-p="Over" data-quota="{{quotaOver}}" class="btnQuota btn light-blue darken-4">{{quotaOver}}</button></td>
+                <td><button data-s1="{{s1}}" data-s2="{{s2}}" data-timestamp="{{timestamp}}" data-p="Under" data-quota="{{quotaUnder}}" class="btnQuota btn light-blue darken-4">{{quotaUnder}}</button></td>
+            </h5>
+        </tr>
+        {{/partite}}
+    </table>
+    <h4>Schedina</h4>
+        <table class="scheda">
+            <tr>
+                <td><b>Casa</b></td>
+                <td><b>Trasferta</b></td>
+                <td><b>Scommessa</b></td>
+                <td><b>Quota</b></td>
+            </tr>
+        </table>
+        <br>
+        <div class="" style="width: 100%; height: auto;">
+            <div style="width: 25%; float: left;"><input type="number" class="puntataInput" placeholder="Inserisci puntata..." min="1" value="1" style="text-align: right;"></div>
+            <div style="width: 75%; float: left; line-height: 46px; text-align: right" class="sommaScheda">
+                Quota: 0 - Bonus: 0 - <b>Vincita: 0</b>
+            </div>
+        </div>
+        <div class="waves-effect btn red darken-1 white-text scommettiBtn" style="float: right">Scommetti</div>
     </div>
+    <script src="./script.js"></script>
+    <script src="./sidenav.js"></script>
+    <style>
+        button {
+            width: 64px;
+        }
+        .hidden {
+            display: none;
+        }
+        td {
+            padding: 2px 5px;
+        }
+        @media (max-width: 600px) {
+            
+            h3 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
 </body>
 </html>

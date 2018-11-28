@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Classifica</title>
+    <title>Schedine</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-
 <body>
     <div class="container">
         {{!-- navbar --}}
@@ -20,9 +18,9 @@
                 <a href="/" class="brand-logo">LostBet</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li><a href="/">Partite</a></li>
-                    <li class="active"><a href="/classifica">Classifica</a></li>
+                    <li><a href="/classifica">Classifica</a></li>
                     <li><a href="/risultati">Risultati</a></li>
-                    <li><a href="/schedine">Schedine</a></li>
+                    <li class="active"><a href="/schedine">Schedine</a></li>
                     <li><a href="/logout">LogOut</a></li>
                     <li><a href="#">C: {{crediti}}</a></li>
                 </ul>
@@ -36,40 +34,28 @@
             <li><a href="/logout">LogOut</a></li>
             <li><a href="#">C: {{crediti}}</a></li>
         </ul>
-        {{!-- navbar --}}
+    {{!-- navbar --}}
+    {{#bets}}
+    <div class="col s12 m7">
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content" style="padding: 10px">
+                    <h6>{{mese}}</h6>
+                    {{#partite}}
+                    <p>{{s1}} - {{s2}} <b>@{{quota}}</b> <span class="secondary-content">{{p}}</span></p>
+                    {{/partite}}
+                    <b>Puntata: {{puntata}} - Bonus: {{bonus}} - Vincita Potenziale: {{vincitaPotenziale}}</b>
+                </div>
+                <div class="card-action" style="padding: 10px">
+                    <a class="light-blue-text darken-4-text" href="/controllaScheda/{{id}}">CONTROLLA</a>
+                    <a class="red-text darken-3" href="/rimuoviScheda/{{id}}">RIMUOVI</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/bets}}
 
-        <h3>Classifica Campionato LostBet</h3>
-        <table>
-        <tr>
-            <td><b>P:</b></td>
-            <td><b>Squadra:</b></td>
-            <td><b>Punti:</b></td>
-            <td><b>pv:</b></td>
-            <td><b>pp:</b></td>
-            <td><b>ps:</b></td>
-            <td><b>GF:</b></td>
-            <td><b>GS:</b></td>
-        </tr>
-        {{#squadre}}
-        <tr>
-            <td>{{posizione}}</td>
-            <td><b>{{nome}}</b>:</td>
-            <td><b>{{punti}}</b></td>
-            <td>{{pv}}</td>
-            <td>{{pp}}</td>
-            <td>{{ps}}</td>
-            <td>{{golfatti}}</td>
-            <td>{{golsubiti}}</td>
-        </tr>
-        {{/squadre}}
-        </table>
-        
-        <style>
-            td {
-                padding: 5px 5px;
-            }
-        </style>
-        <script src="./sidenav.js"></script>
+    </div>
+    <script src="./sidenav.js"></script>
 </body>
-
 </html>

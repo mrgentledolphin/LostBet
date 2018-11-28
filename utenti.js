@@ -4,7 +4,7 @@ let utentiSchema = new Schema({
     email: String,
     username: String,
     password: String,
-    crediti: String
+    crediti: Number
 }, {
     collection: 'utenti'
 })

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Risultati</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        {{!-- navbar --}}
+        <nav>
+            <div class="nav-wrapper light-blue darken-4">
+                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <a href="/" class="brand-logo">LostBet</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/">Partite</a></li>
+                    <li><a href="/classifica">Classifica</a></li>
+                    <li class="active"><a href="/risultati">Risultati</a></li>
+                    <li><a href="/schedine">Schedine</a></li>
+                    <li><a href="/logout">LogOut</a></li>
+                    <li><a href="#">C: {{crediti}}</a></li>
+                </ul>
+            </div>
+        </nav>
+        <ul id="slide-out" class="sidenav">
+            <li><a href="/">Partite</a></li>
+            <li><a href="/classifica">Classifica</a></li>
+            <li><a href="/risultati">Risultati</a></li>
+            <li><a href="/schedine">Schedine</a></li>
+            <li><a href="/logout">LogOut</a></li>
+            <li><a href="#">C: {{crediti}}</a></li>
+        </ul>
+    {{!-- navbar --}}
+   <table>
+    <h5>
+       <tr>
+           <td><b>Partita</b></td>
+           <td><b>Trasferta</b></td>
+           <td><b>Risultato</b></td>
+       </tr>
+    {{#ris}}
+        <tr>
+            <td>{{s1}}</td>
+            <td>{{s2}}</td>
+            <td>{{gol1}}-{{gol2}}</td>
+        </tr>
+    {{/ris}}
+    </h5>
+    </table>
+    </div>
+    <script src="./sidenav.js"></script>
+</body>
+</html>
