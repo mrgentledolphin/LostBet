@@ -251,7 +251,7 @@ express()
         if (!req.isAuthenticated()) {
             res.redirect('/login')
         } else {
-            betsModel.find({'idUtente': 'buonuomo'}, (err, scommesse) => {
+            betsModel.find({'idUtente': req.session.passport.user}, (err, scommesse) => {
                         let sommaQuote, id, bonus, bets = [], puntata, quota,vincitaPotenziale, partite = []
                         for (let i = 0; i < scommesse.length; i++) {
                             sommaQuote = 0
@@ -316,7 +316,7 @@ express()
         } else {
             let schedina = req.body
             let bet = {
-                idUtente: 'buonuomo',
+                idUtente: req.session.passport.user,
                 puntata: req.body[0].puntata,
                 timestamp: req.body[0].timestamp,
                 riscossa: false,
