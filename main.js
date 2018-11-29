@@ -324,6 +324,8 @@ express()
             }
             if (bet.puntata > req.session.crediti) {
                 res.render('message', {msg: 'Credito Insufficiente! :C'})
+            } else if (bet.timestamp != attualeStamp) {
+                res.render('message', {msg: 'tempo scaduto!'})
             } else {
                 utentiModel.findOne({'_id': ObjectId(req.session.passport.user)}, (err, utente) => {
                     if (err) res.send(err)
