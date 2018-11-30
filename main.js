@@ -161,7 +161,9 @@ express()
         } else {
             let id = req.params.id
             betsModel.findOne({'_id': ObjectId(id)}, (err, bet) => {
-                if (attualeStamp == bet.timestamp) {
+                if (bet.timestamp === undefined || bet.timestamp === null) {
+                    res.render('message', {msg: 'Schedina non disponibile!'})
+                } else if (attualeStamp == bet.timestamp) {
                     res.render('message', {msg: "Risultati ancora non disponibili"})
                 } else {
                     let vinta = true
