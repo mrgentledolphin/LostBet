@@ -1,5 +1,24 @@
 $(function () {
     let schedina = [], s1, s2, timestamp, p, quota, puntata, bonus, vincita, quote = [], sommaQuote = 0, rimuovi = false
+
+    let orario = $('#orario').text().split(':')
+    let orarioAttuale = new Date()
+    let countDownDate = new Date(orarioAttuale.getFullYear(), orarioAttuale.getMonth(), orarioAttuale.getDate(), orario[0], orario[1], orario[2])
+
+    setInterval(function () {
+        let now = new Date()
+        let distance = countDownDate - now
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000)
+        document.getElementById("orarioScadenza").innerHTML = minutes + ":" + seconds
+
+        if (distance < 0) {
+            clearInterval(x)
+            document.getElementById("orarioScadenza").innerHTML = "Risultati Pronti!"
+        }
+    }, 1000)
+
     $('.btnQuota').on('click', (data) => {
         $(this)[0].activeElement.classList.remove('darken-4')
         rimuovi = false
@@ -39,7 +58,7 @@ $(function () {
                 sommaQuote += parseFloat(quote[i].quota)
             }
             sommaQuote = Math.round(sommaQuote * 100) / 100
-            bonus = ((sommaQuote * puntata) / 100) * (schedina.length * 35)
+            bonus = ((sommaQuote * puntata) / 100) * (schedina.length * 20)
             vincita = (sommaQuote * puntata) + bonus
             bonus = Math.round(bonus * 100) / 100
             vincita = Math.round(vincita * 100) / 100
@@ -48,6 +67,7 @@ $(function () {
             `)
         } else {
             $(this)[0].activeElement.classList.add('darken-4')
+            sommaQuote -= quota
             for (let i = 0; i < schedina.length; i++) {
                 if (schedina[i].s1 == s1 && schedina[i].p == p) {
                     schedina.splice(i, 1)
@@ -69,7 +89,7 @@ $(function () {
             sommaQuote += parseFloat(quote[i].quota)
         }
         sommaQuote = Math.round(sommaQuote * 100) / 100
-        bonus = ((sommaQuote * puntata) / 100) * (schedina.length * 35)
+        bonus = ((sommaQuote * puntata) / 100) * (schedina.length * 20)
         vincita = (sommaQuote * puntata) + bonus
         bonus = Math.round(bonus * 100) / 100
         vincita = Math.round(vincita * 100) / 100

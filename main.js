@@ -161,12 +161,14 @@ express()
         } else {
             let id = req.params.id
             betsModel.findOne({'_id': ObjectId(id)}, (err, bet) => {
-                if (bet.timestamp === undefined || bet.timestamp === null) {
+                if (bet === undefined || bet === null) {
                     res.render('message', {msg: 'Schedina non disponibile!'})
                 } else if (attualeStamp == bet.timestamp) {
                     res.render('message', {msg: "Risultati ancora non disponibili"})
                 } else {
                     let vinta = true
+                    let partitePerse = []
+                    let perseMsg = 'Schedina Persa! :C'
                     storicoRisultatiModel.find({'timestamp': bet.timestamp}, (err, storico) => {
                         let partite = bet.partite
                         for (let i = 0; i < partite.length; i++) {
@@ -176,36 +178,43 @@ express()
                                         case '1': 
                                             if ( !(storico[j].gol1 > storico[j].gol2) ) {
                                                 vinta = false
+                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
                                             }
                                             break
                                         case 'x': 
                                             if ( !(storico[j].gol1 == storico[j].gol2) ) {
                                                 vinta = false
+                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
                                             }
                                             break
                                         case '2': 
                                             if ( !(storico[j].gol1 < storico[j].gol2) ) {
                                                 vinta = false
+                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
                                             }
                                             break
                                         case 'Gol': 
                                             if ( !(storico[j].gol1 > 0 && storico[j].gol2 > 0) ) {
                                                 vinta = false
+                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
                                             }
                                             break
                                         case 'NoGol': 
                                             if ( (storico[j].gol1 > 0 && storico[j].gol2 > 0) ) {
                                                 vinta = false
+                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
                                             }
                                             break
                                         case 'Under': 
                                             if ( (storico[j].gol1 + storico[j].gol2 > 3) ) {
                                                 vinta = false
+                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
                                             }
                                             break
                                         case 'Over': 
                                             if ( !(storico[j].gol1 + storico[j].gol2 > 3) ) {
                                                 vinta = false
+                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
                                             }
                                             break
                                     }
@@ -238,9 +247,12 @@ express()
                                 })
                             })
                         } else {
+                            for (let i = 0; i < partitePerse.length; i++) {
+                                perseMsg += partitePerse[i]
+                            }
                             betsModel.deleteMany({'_id': ObjectId(id)}, (err) => {
                                 if (err) res.send(err)
-                                res.render('message', {msg: 'Schedina Persa! :C'})
+                                res.render('message', {msg: perseMsg})
                             })
                         }
                         

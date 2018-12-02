@@ -37,7 +37,7 @@
             <li><a href="#">C: {{crediti}}</a></li>
         </ul>
     {{!-- navbar --}}
-    <h4>Giornata: {{giornata}} - Scade alle {{ore}}:{{minuti}}:{{secondi}}</h4>
+    <h4>Giornata: {{giornata}} - Scade alle <span id="orario">{{ore}}:{{minuti}}:{{secondi}}</span> <span class="light-blue-text darken-4" id="orarioScadenza"></span></h4>
     <table>
         <tr>
             <td><b>Squadre</b></td>
