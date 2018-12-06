@@ -178,43 +178,85 @@ express()
                                         case '1': 
                                             if ( !(storico[j].gol1 > storico[j].gol2) ) {
                                                 vinta = false
-                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
+                                                partitePerse.push({
+                                                    s1: storico[j].s1,
+                                                    s2: storico[j].s2,
+                                                    gol1: storico[j].gol1,
+                                                    gol2: storico[j].gol2,
+                                                    p: partite[i].p
+                                                })
                                             }
                                             break
                                         case 'x': 
                                             if ( !(storico[j].gol1 == storico[j].gol2) ) {
                                                 vinta = false
-                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
+                                                partitePerse.push({
+                                                    s1: storico[j].s1,
+                                                    s2: storico[j].s2,
+                                                    gol1: storico[j].gol1,
+                                                    gol2: storico[j].gol2,
+                                                    p: partite[i].p
+                                                })
                                             }
                                             break
                                         case '2': 
                                             if ( !(storico[j].gol1 < storico[j].gol2) ) {
                                                 vinta = false
-                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
+                                                partitePerse.push({
+                                                    s1: storico[j].s1,
+                                                    s2: storico[j].s2,
+                                                    gol1: storico[j].gol1,
+                                                    gol2: storico[j].gol2,
+                                                    p: partite[i].p
+                                                })
                                             }
                                             break
                                         case 'Gol': 
                                             if ( !(storico[j].gol1 > 0 && storico[j].gol2 > 0) ) {
                                                 vinta = false
-                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
+                                                partitePerse.push({
+                                                    s1: storico[j].s1,
+                                                    s2: storico[j].s2,
+                                                    gol1: storico[j].gol1,
+                                                    gol2: storico[j].gol2,
+                                                    p: partite[i].p
+                                                })
                                             }
                                             break
                                         case 'NoGol': 
                                             if ( (storico[j].gol1 > 0 && storico[j].gol2 > 0) ) {
                                                 vinta = false
-                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
+                                                partitePerse.push({
+                                                    s1: storico[j].s1,
+                                                    s2: storico[j].s2,
+                                                    gol1: storico[j].gol1,
+                                                    gol2: storico[j].gol2,
+                                                    p: partite[i].p
+                                                })
                                             }
                                             break
                                         case 'Under': 
                                             if ( (storico[j].gol1 + storico[j].gol2 > 3) ) {
                                                 vinta = false
-                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
+                                                partitePerse.push({
+                                                    s1: storico[j].s1,
+                                                    s2: storico[j].s2,
+                                                    gol1: storico[j].gol1,
+                                                    gol2: storico[j].gol2,
+                                                    p: partite[i].p
+                                                })
                                             }
                                             break
                                         case 'Over': 
                                             if ( !(storico[j].gol1 + storico[j].gol2 > 3) ) {
                                                 vinta = false
-                                                partitePerse.push(` ${storico[j].s1} - ${storico[j].s2}: ${partite[i].p}, `)
+                                                partitePerse.push({
+                                                    s1: storico[j].s1,
+                                                    s2: storico[j].s2,
+                                                    gol1: storico[j].gol1,
+                                                    gol2: storico[j].gol2,
+                                                    p: partite[i].p
+                                                })
                                             }
                                             break
                                     }
@@ -228,7 +270,7 @@ express()
                                 sommaQuote += parseFloat(partite[i].quota)
                             }
                             sommaQuote = Math.round(sommaQuote * 100) / 100
-                            bonus = ((sommaQuote * puntata) / 100) * (nPartite * 20)
+                            bonus = ((sommaQuote * puntata) / 100) * (nPartite * 30)
                             vincita = (sommaQuote * puntata) + bonus
                             bonus = Math.round(bonus * 100) / 100
                             vincita = Math.round(vincita * 100) / 100
@@ -247,12 +289,9 @@ express()
                                 })
                             })
                         } else {
-                            for (let i = 0; i < partitePerse.length; i++) {
-                                perseMsg += partitePerse[i]
-                            }
                             betsModel.deleteMany({'_id': ObjectId(id)}, (err) => {
                                 if (err) res.send(err)
-                                res.render('message', {msg: perseMsg})
+                                res.render('schedaPersa', {partitePerse})
                             })
                         }
                         
@@ -279,7 +318,7 @@ express()
                                     quota: scommesse[i].partite[j].quota
                                 })
                             }
-                            bonus = ((sommaQuote * scommesse[i].puntata) / 100) * (scommesse[i].partite.length * 20)
+                            bonus = ((sommaQuote * scommesse[i].puntata) / 100) * (scommesse[i].partite.length * 30)
                             bonus = Math.round(bonus * 100) / 100
                             vincitaPotenziale = Math.round(((sommaQuote * scommesse[i].puntata) + bonus) * 100) / 100
                             puntata = scommesse[i].puntata

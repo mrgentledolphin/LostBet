@@ -5,7 +5,7 @@ $(function () {
     let orarioAttuale = new Date()
     let countDownDate = new Date(orarioAttuale.getFullYear(), orarioAttuale.getMonth(), orarioAttuale.getDate(), orario[0], orario[1], orario[2])
 
-    setInterval(function () {
+    let x = setInterval(function () {
         let now = new Date()
         let distance = countDownDate - now
         let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
@@ -58,7 +58,7 @@ $(function () {
                 sommaQuote += parseFloat(quote[i].quota)
             }
             sommaQuote = Math.round(sommaQuote * 100) / 100
-            bonus = ((sommaQuote * puntata) / 100) * (schedina.length * 20)
+            bonus = ((sommaQuote * puntata) / 100) * (schedina.length * 30)
             vincita = (sommaQuote * puntata) + bonus
             bonus = Math.round(bonus * 100) / 100
             vincita = Math.round(vincita * 100) / 100
@@ -89,7 +89,7 @@ $(function () {
             sommaQuote += parseFloat(quote[i].quota)
         }
         sommaQuote = Math.round(sommaQuote * 100) / 100
-        bonus = ((sommaQuote * puntata) / 100) * (schedina.length * 20)
+        bonus = ((sommaQuote * puntata) / 100) * (schedina.length * 30)
         vincita = (sommaQuote * puntata) + bonus
         bonus = Math.round(bonus * 100) / 100
         vincita = Math.round(vincita * 100) / 100
